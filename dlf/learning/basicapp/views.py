@@ -18,8 +18,8 @@ def register(request):
             profile=profile_form.save(commit=False)
             profile.user=user
 
-            if 'Profile_pic' in request.FILES:
-                profile.Profile_pic=request.FILES['profile_pic']
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic=request.FILES['profile_pic']
             profile.save()
             registered=True
 
@@ -29,4 +29,4 @@ def register(request):
         user_form=UserForm()
         profile_form=UserProfileInfoForm()
 
-    return render(request,'basicapp/registration.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})    
+    return render(request,'basicapp/registration.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
