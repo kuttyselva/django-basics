@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'basicapp',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,4 @@ STATICFILES_DIRS=[STATIC_DIR]
 
 MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
+LOGIN_URL='basicapp/login'

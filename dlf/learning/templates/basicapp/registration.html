@@ -1,5 +1,6 @@
 {% extends "basicapp/base.html" %}
 {% load staticfiles  %}
+{% load widget_tweaks %}
 {% block body_block %}
 <div class="jumbotron">
 {% if registered %}
@@ -9,9 +10,55 @@
 <h3>fill out the form</h3>
 <form enctype="multipart/form-data" method="post">
 {% csrf_token %}
-{{ user_form.as_p }}
-{{ profile_form.as_p }}
-<input type="submit" name="" value="register">
+{% for field in user_form.visible_fields %}
+   <div class="form-group">
+     {{ field.label_tag }}
+
+     {% if user_form.is_bound %}
+       {% if field.errors %}
+         {% render_field field class="form-control is-invalid" %}
+         {% for error in field.errors %}
+           <div class="invalid-feedback">
+             {{ error }}
+           </div>
+         {% endfor %}
+       {% else %}
+         {% render_field field class="form-control is-valid" %}
+       {% endif %}
+     {% else %}
+       {% render_field field class="form-control" %}
+     {% endif %}
+
+     {% if field.help_text %}
+       <small class="form-text text-muted">{{ field.help_text }}</small>
+     {% endif %}
+   </div>
+ {% endfor %}
+ {% for field in profile_form.visible_fields %}
+   <div class="form-group">
+     {{ field.label_tag }}
+
+     {% if profile_form.is_bound %}
+       {% if field.errors %}
+         {% render_field field class="form-control is-invalid" %}
+         {% for error in field.errors %}
+           <div class="invalid-feedback">
+             {{ error }}
+           </div>
+         {% endfor %}
+       {% else %}
+         {% render_field field class="form-control is-valid" %}
+       {% endif %}
+     {% else %}
+       {% render_field field class="form-control" %}
+     {% endif %}
+
+     {% if field.help_text %}
+       <small class="form-text text-muted">{{ field.help_text }}</small>
+     {% endif %}
+   </div>
+ {% endfor %}
+ <input type="submit"  class="btn btn-primary" name="" value="register">
 </form>
 {%endif%}
 </div>
