@@ -7,5 +7,4 @@ class UserProfileInfo(models.Model):
     profile_pic=models.FileField(upload_to='profile_pics',blank=True)
 
     def __str__(self):
-        return self.user.Username
-        
+         return self.user.username
